@@ -137,7 +137,7 @@ BIDS_DIR=$SCRATCH_SITE_DIR/BIDS/
 DERIVS_DIR=$SCRATCH_SITE_DIR/derivatives
 
 ## unpack site-bids-archive on scratch_ssd
-eval "$SCRIPTDIR/fmri_0_unpack_site_bids_tar.sh -p $PROJECT -s $SITE"
+eval "$SCRIPTDIR/fmri_0_unpack_site_bids_archive.sh -p $PROJECT -s $SITE"
 
 ## use input subjects if specified, otherwise assume all participants in site
 if [ "${#InputSubjArr[@]}" -gt 0 ]; then
