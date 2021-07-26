@@ -1,6 +1,8 @@
 # Open Data
 Scripts and documentation for dealing with open datasets
 
+## Running fMRI prep on Compute Canada / ACENET
+
 ### TAR & Upload Site BIDS Data (from PBIL)
 From the PBIL, tar and upload raw bids dataset onto shared project drive. Each site (ie, /ADHD200/Brown/) is done separately to limit size of tar-archives, transfer speeds, and job-management on ComputeCanada. Use the tar_and_rsync_to_CC.sh script from the PBIL, /shared/uher/FORBOW/OpenDatasets/ADHD200/. This script will tar an entire site's raw BIDS dataset, then rsync up to cedar into a Tar_BIDS folder under the Project space (eg, ~/projects/def-ruher/fmri/ADHD200/Tar_BIDS/Brown.tar)
 
@@ -43,8 +45,9 @@ cd /shared/uher/FORBOW/OpenDatasets/ADHD200/
 ./download_tar_derivs.sh -p ADHD200 -s Brown
 `
 
+---
 
-## Neuroimaging
+## Open Dataset Descriptions
 
 * [ADHD-200](https://github.com/forbow-lab/open-data/wiki/ADHD200)
 * [ABCD](https://github.com/forbow-lab/open-data/wiki/ABCD)
