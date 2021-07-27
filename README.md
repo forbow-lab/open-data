@@ -51,3 +51,4 @@ cd /shared/uher/FORBOW/OpenDatasets/ADHD200/
 
 * [ADHD-200](https://github.com/forbow-lab/open-data/wiki/ADHD200)
 * [ABCD](https://github.com/forbow-lab/open-data/wiki/ABCD)
+* [PNC](https://github.com/forbow-lab/open-data/wiki/PNC)
