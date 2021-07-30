@@ -8,6 +8,7 @@ Scripts and documentation for dealing with open datasets
 * [ADHD-200](https://github.com/forbow-lab/open-data/wiki/ADHD200)
 * [ABCD](https://github.com/forbow-lab/open-data/wiki/ABCD)
 * [PNC - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC)
+* [Child Mind Institute: healthy brain network (HBN)](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN)
 
 
 ---
