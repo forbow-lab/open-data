@@ -1,5 +1,5 @@
 # Open Data
-Scripts and documentation for dealing with open datasets
+Scripts and documentation for open datasets
 
 ---
 
@@ -8,7 +8,8 @@ Scripts and documentation for dealing with open datasets
 * [ADHD-200](https://github.com/forbow-lab/open-data/wiki/ADHD200)
 * [ABCD](https://github.com/forbow-lab/open-data/wiki/ABCD)
 * [**PNC** - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC)
-* [**HBN** - Child Mind Institute: healthy brain network ](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN)
+* [**HBN** - Child Mind Institute: healthy brain network](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN)
+* [**ABIDE** - Autism Brain Imaging Data Exchange](https://github.com/forbow-lab/open-data/wiki/ABIDE-I-and-II)
 
 
 ---
