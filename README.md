@@ -5,12 +5,13 @@ Scripts and documentation for open datasets
 
 ## Open Dataset Descriptions
 
-* [ADHD-200](https://github.com/forbow-lab/open-data/wiki/ADHD200)
+
 * [ABCD](https://github.com/forbow-lab/open-data/wiki/ABCD)
 * [**PNC** - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC)
 * [**HBN** - Child Mind Institute: healthy brain network](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN)
 * [**ABIDE** - Autism Brain Imaging Data Exchange](https://github.com/forbow-lab/open-data/wiki/ABIDE-I-and-II)
 * [**NKI** - Enhanced Nathan Kline Institute - Rockland Sample](https://github.com/forbow-lab/open-data/wiki/NKI)
+* [**ADHD-200** - International Neuroimaging Datasharing Initiative (INDI), the ADHD-200 Sample](https://github.com/forbow-lab/open-data/wiki/ADHD200)
 
 
 ---
