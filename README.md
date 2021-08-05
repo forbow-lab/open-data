@@ -8,6 +8,7 @@ Scripts and documentation for open datasets
 
 * [**ABCD** - The Adolescent Brain Cognitive Development Study](https://github.com/forbow-lab/open-data/wiki/ABCD)
 * [**PNC** - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC)
+* [**PING** - Pediatric Imaging, Neurocognition, and Genetics](https://github.com/forbow-lab/open-data/wiki/PING)
 * [**HBN** - Child Mind Institute: healthy brain network](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN)
 * [**ABIDE** - Autism Brain Imaging Data Exchange](https://github.com/forbow-lab/open-data/wiki/ABIDE-I-and-II)
 * [**NKI** - Enhanced Nathan Kline Institute - Rockland Sample](https://github.com/forbow-lab/open-data/wiki/NKI)
