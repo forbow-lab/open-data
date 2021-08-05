@@ -5,8 +5,8 @@ Scripts and documentation for open datasets
 
 ## Open Dataset Descriptions
 
-* [**HBN** - Child Mind Institute: healthy brain network](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN)
 * [**ABCD** - The Adolescent Brain Cognitive Development Study](https://github.com/forbow-lab/open-data/wiki/ABCD)
+* [**HBN** - Child Mind Institute: healthy brain network](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN)
 * [**HCP-D** - HCP-Development](https://github.com/forbow-lab/open-data/wiki/HCP-D)
 * [**PNC** - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC)
 * [**NKI** - Enhanced Nathan Kline Institute - Rockland Sample](https://github.com/forbow-lab/open-data/wiki/NKI)
