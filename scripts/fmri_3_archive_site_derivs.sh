@@ -79,8 +79,8 @@ rsync -rtluv $SLURM_LOG_DIR $SCRATCH_SITE_DIR/slurm_logs
 ## create site-derivs-archive, move to project-space, and report disk-usage
 TEMP_TAR=$SCRATCH_DIR_SSD/$PROJECT/${SITE}.tar
 echo " ++ creating initial archive=${TEMP_TAR} from $SCRATCH_SITE_DIR/"
-tar -cvf ${DERIVS_TAR} $SCRATCH_SITE_DIR/
-if [ $? -ne 0 ]]; then
+tar -cvf ${TEMP_TAR} $SCRATCH_SITE_DIR/
+if [[ $? -ne 0 ]]; then
 	echo "*** ERROR: tar-command failed, please try again..."
 	exit 2
 fi
@@ -88,12 +88,11 @@ echo " ++ tar successful, size=comparison:"
 du -sh $SCRATCH_SITE_DIR/ ${TEMP_TAR}
 
 echo " ++ copying initial archive=${TEMP_TAR} to ${DERIVS_TAR}"
-rsync -rtlv ${TEMP_TAR} ${DERIVS_TAR}
-if [ $? -ne 0 ]]; then
+mv ${TEMP_TAR} ${DERIVS_TAR}
+if [[ $? -ne 0 ]]; then
 	echo "*** ERROR: rsync tar to PROJECT-drive failed, please try again..."
 	exit 2
 fi
-du -sh $SCRATCH_SITE_DIR/ ${TEMP_TAR} ${DERIVS_TAR}
-rm -fv ${TEMP_TAR}
+du -sh $SCRATCH_SITE_DIR/ ${DERIVS_TAR}
 
 exit 0

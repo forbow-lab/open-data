@@ -17,6 +17,7 @@ SCRIPTDIR=$(dirname $SCRIPT)
 echo " + `date`: starting script = $SCRIPT"
 
 EMAIL_ARR=("chelmick@dal.ca" "vlad.drobinin@dal.ca")
+NCPUS=16
 RESTART_JOB="no"
 DEBUG_MODE="no"
 SUBMIT_MODE="no"
@@ -121,9 +122,9 @@ fi
 
 ## build a job-resubmission command, including adding extra NCPUS to finish faster! (default_ncpus=8, takes ~8-11 hrs)
 if [ "$SUBMIT_MODE" == "yes" -a "${#SUBJECT_ARR[@]}" -gt 0 ]; then
-	cmd="$SCRIPTDIR/fmri_1_slurm_fmriprep_batch.sh -e ${EMAIL} -p $PROJECT -s $SITE -n 12 ${SUBJECT_ARR[@]}"
+	cmd="$SCRIPTDIR/PNC_1_slurm_fmriprep_batch.sh -e ${EMAIL} -p $PROJECT -s $SITE -n ${NCPUS} ${SUBJECT_ARR[@]}"
 	if [ "$DEBUG_MODE" == "yes" ]; then
-		cmd="$SCRIPTDIR/fmri_1_slurm_fmriprep_batch.sh -d -e ${EMAIL} -p $PROJECT -s $SITE -n 12 ${SUBJECT_ARR[@]}"
+		cmd="$SCRIPTDIR/PNC_1_slurm_fmriprep_batch.sh -d -e ${EMAIL} -p $PROJECT -s $SITE -n ${NCPUS} ${SUBJECT_ARR[@]}"
 	fi
 	echo " ++ restarting site=$SITE, subjects_arr=[${SUBJECT_ARR[@]}]"
 	eval ${cmd}

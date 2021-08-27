@@ -133,11 +133,11 @@ mkdir -p ${SLURM_LOG_DIR}/
 SCRATCH_DIR_SSD=$SCRATCH/fmri
 SCRATCH_SITE_DIR=$SCRATCH_DIR_SSD/$PROJECT/$SITE
 mkdir -p ${SCRATCH_SITE_DIR}/
-BIDS_DIR=$SCRATCH_SITE_DIR/BIDS/
+BIDS_DIR=$SCRATCH_SITE_DIR/BIDS
 DERIVS_DIR=$SCRATCH_SITE_DIR/derivatives
 
-## unpack site-bids-archive on scratch_ssd
-eval "$SCRIPTDIR/fmri_0_unpack_site_bids_archive.sh -p $PROJECT -s $SITE"
+### unpack site-bids-archive on scratch_ssd
+##eval "$SCRIPTDIR/fmri_0_unpack_site_bids_archive.sh -p $PROJECT -s $SITE"
 
 ## use input subjects if specified, otherwise assume all participants in site
 if [ "${#InputSubjArr[@]}" -gt 0 ]; then
@@ -162,8 +162,8 @@ for S in ${SUBJECT_LIST} ; do
 		echo " *** ERROR: could not locate subject-bidsdir = $SDIR/"
 		continue
 	fi
-	t1=$(find $SDIR -type f -name "sub-${S}_*_T1w.nii.gz" -print)
-	func=$(find $SDIR -type f -name "sub-${S}_*task-rest_bold.nii.gz" -print)
+	t1=$(find $SDIR -type f -name "sub-${S}_*T1w.nii.gz" -print)
+	func=$(find $SDIR -type f -name "sub-${S}_*task-rest_*bold.nii.gz" -print)
 	if [ ! -r "$t1" -o ! -r "$func" ]; then
 		echo " * ERROR: missing required bids files for $SDIR/"
 		continue
@@ -197,12 +197,12 @@ for S in ${SUBJECT_LIST} ; do
 echo " * \$(date +%Y%m%d-%H%M%S): starting job=${jobname}.job on slurm_tmpdir=\${SLURM_TMPDIR}"
 
 ## set variables pointing to containers,licenses,templates
-FMRIPREP_SIMG=${SCRATCH_DIR_SSD}/fmriprep-20.2.1_neptune.sif
+FMRIPREP_SIMG=${SCRATCH_DIR_SSD}/fmriprep-20.2.3.sif
 TF_HOST_HOME=${SCRATCH_DIR_SSD}/templateflow
 FS_LIC_PATH=$HOME/.freesurfer_license.txt
 
 ## always ensure containers,licenses,templates are current on fast SSD /SCRATCH/
-rsync -rltuv ${PROJECT_DIR_TAPE}/fmriprep-20.2.1_neptune.sif \${FMRIPREP_SIMG}
+rsync -rltuv ${PROJECT_DIR_TAPE}/fmriprep-20.2.3.sif \${FMRIPREP_SIMG}
 rsync -rltuv ${PROJECT_DIR_TAPE}/templateflow/ \${TF_HOST_HOME}/
 rsync -rltuv ${PROJECT_DIR_TAPE}/freesurfer_license.txt \${FS_LIC_PATH}
 
@@ -220,7 +220,9 @@ echo " * \$(date +%Y%m%d-%H%M%S): starting cmd: \$cmd"
 eval \$cmd
 exitcode=\$?
 echo " * \$(date +%Y%m%d-%H%M%S): finished job=${jobname}.job with exit-code=\$exitcode"
-cp -vf \$SLURM_TMPDIR/fmriprep_wf/resource_monitor.json $SCRATCH_DIR_SSD/${PROJECT}/resource_monitor_files/fmriprep_${SITE}_${SLURM_NCPUS}cpu_sub-${S}_resource_monitor.json
+rDIR=$SCRATCH_DIR_SSD/${PROJECT}/${SITE}/resource_monitor_files
+mkdir -p \${rDIR}/
+cp -vf \$SLURM_TMPDIR/fmriprep_wf/resource_monitor.json \${rDIR}/fmriprep_${SITE}_${SLURM_NCPUS}cpu_sub-${S}_resource_monitor.json
 if [ \$exitcode -ne 0 ]; then 
 	## problem-encountered, copy the entire output folder for review
 	workdir=${SCRATCH_DIR_SSD}/\$(basename \$SLURM_TMPDIR).workdir 
