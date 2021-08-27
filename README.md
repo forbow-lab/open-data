@@ -1,5 +1,26 @@
 # Open Data
-Scripts and documentation for dealing with open datasets
+Scripts and documentation for open datasets
+
+---
+
+## Open Dataset Descriptions
+
+* [**ABCD** - The Adolescent Brain Cognitive Development Study](https://github.com/forbow-lab/open-data/wiki/ABCD)
+* [**HBN** - Child Mind Institute: healthy brain network](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN)
+* [**HCP-D** - HCP-Development](https://github.com/forbow-lab/open-data/wiki/HCP-D)
+* [**PNC** - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC)
+* [**NKI** - Enhanced Nathan Kline Institute - Rockland Sample](https://github.com/forbow-lab/open-data/wiki/NKI)
+* [**PING** - Pediatric Imaging, Neurocognition, and Genetics](https://github.com/forbow-lab/open-data/wiki/PING)
+* [**ABIDE** - Autism Brain Imaging Data Exchange](https://github.com/forbow-lab/open-data/wiki/ABIDE-I-and-II)
+* [**CoRR** - Consortium for Reliability and Reproducibility](https://github.com/forbow-lab/open-data/wiki/CoRR)
+* [**ADHD-200** - International Neuroimaging Datasharing Initiative (INDI), the ADHD-200 Sample](https://github.com/forbow-lab/open-data/wiki/ADHD200)
+* [**NIHPD** - The NIH MRI study of normal brain development](https://github.com/forbow-lab/open-data/wiki/NIHPD)
+
+
+---
+
+
+## Running fMRI prep on Compute Canada / ACENET
 
 ### TAR & Upload Site BIDS Data (from PBIL)
 From the PBIL, tar and upload raw bids dataset onto shared project drive. Each site (ie, /ADHD200/Brown/) is done separately to limit size of tar-archives, transfer speeds, and job-management on ComputeCanada. Use the tar_and_rsync_to_CC.sh script from the PBIL, /shared/uher/FORBOW/OpenDatasets/ADHD200/. This script will tar an entire site's raw BIDS dataset, then rsync up to cedar into a Tar_BIDS folder under the Project space (eg, ~/projects/def-ruher/fmri/ADHD200/Tar_BIDS/Brown.tar)
@@ -43,9 +64,10 @@ cd /shared/uher/FORBOW/OpenDatasets/ADHD200/
 ./download_tar_derivs.sh -p ADHD200 -s Brown
 `
 
+---
 
-## Neuroimaging
 
+<<<<<<< HEAD
 * [ADHD-200](https://github.com/forbow-lab/open-data/wiki/ADHD200)
 * [ABCD](https://github.com/forbow-lab/open-data/wiki/ABCD)
 
@@ -53,3 +75,5 @@ cd /shared/uher/FORBOW/OpenDatasets/ADHD200/
 
 ### [Priorities](https://docs.google.com/document/d/1-Fzzu3Op6nP51oM1lcZ3M3e3-rhNfBRtebmxVf1BMns/edit#heading=h.hx69dzmtqn9c):
 ADHD200 > HBN > ABIDE > Rockland > Corr
+=======
+>>>>>>> dfb0e1eb75c98b39e9d0e756b355553d57d149a5
