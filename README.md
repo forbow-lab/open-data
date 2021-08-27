@@ -64,16 +64,6 @@ cd /shared/uher/FORBOW/OpenDatasets/ADHD200/
 ./download_tar_derivs.sh -p ADHD200 -s Brown
 `
 
----
-
-
-<<<<<<< HEAD
-* [ADHD-200](https://github.com/forbow-lab/open-data/wiki/ADHD200)
-* [ABCD](https://github.com/forbow-lab/open-data/wiki/ABCD)
-
-
 
 ### [Priorities](https://docs.google.com/document/d/1-Fzzu3Op6nP51oM1lcZ3M3e3-rhNfBRtebmxVf1BMns/edit#heading=h.hx69dzmtqn9c):
 ADHD200 > HBN > ABIDE > Rockland > Corr
-=======
->>>>>>> dfb0e1eb75c98b39e9d0e756b355553d57d149a5
