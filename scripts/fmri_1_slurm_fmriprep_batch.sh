@@ -133,20 +133,21 @@ if [[ ! -z "$NCPUS_INPUT" ]]; then
 fi
 SLURM_HRS=$DEFAULT_HRS
 if [[ ! -z "$HRS_INPUT" ]]; then
-        foundUsableOption="no"
-        for n in ${HRS_OPTIONS[@]} ; do
-                if [[ "$n" == "$HRS_INPUT" ]]; then
-                        SLURM_HRS=$HRS_INPUT
-                        echo " + now using SLURM_HRS=${SLURM_HRS}"
-                        foundUsableOption="yes"
-                        break
-                fi
-        done
-        if [ "$foundUsableOption" == "no" ]; then
-                echo " * specified option --hrs=$HRS_INPUT does not match one of the allowed HRS=${HRS_OPTIONS[@]}..."
-                Usage
-        fi
+	foundUsableOption="no"
+	for n in ${HRS_OPTIONS[@]} ; do
+		if [[ "$n" == "$HRS_INPUT" ]]; then
+			SLURM_HRS=$HRS_INPUT
+			echo " + now using SLURM_HRS=${SLURM_HRS}"
+			foundUsableOption="yes"
+			break
+		fi
+	done
+	if [ "$foundUsableOption" == "no" ]; then
+		echo " * specified option --hrs=$HRS_INPUT does not match one of the allowed HRS=${HRS_OPTIONS[@]}..."
+		Usage
+	fi
 fi
+
 
 ## fmriprep-specific resource variables
 RESOURCE_MEM_MB_PER_CPU=1024
