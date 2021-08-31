@@ -15,10 +15,12 @@ Usage() {
 	echo "Example: `basename $0` -p ADHD200 -s Peking_1 -e chelmick@dal.ca"
 	echo ""
 	echo "Options:"
+	echo "  -a|--all    Run all participants at once"
 	echo "  -d|--debug    Enable debug mode, will generate a job script but not submit"
 	echo "  -n|--ncpus    Switch from default=${DEFAULT_NCPUS} to use [8,12,16]"
+	echo "  -h|--hrss     Switch from default=${DEFAULT_HRS} to use [12,16]"
 	echo "  -r|--restart  Restart mode, requires specifing individual subject-IDs"
-	echo "  -h|--help     Prints this help/usage message"
+	echo "  --help        Prints this help/usage message"
 	exit 1
 }
 
@@ -52,6 +54,11 @@ while [[ $# -gt 0 ]]; do
       shift # past arg-name
       shift # past value
       ;;
+    -a|--all)
+      RUN_ALL_MODE="yes"
+      echo " + RUN_ALL_MODE enabled."
+      shift
+      ;;  
     -n|--ncpus)
       NCPUS_INPUT="$2"
       shift # past arg-name
@@ -165,16 +172,21 @@ DERIVS_DIR=$SCRATCH_SITE_DIR/derivatives
 ## use input subjects if specified, otherwise assume all participants in site
 if [ "${#InputSubjArr[@]}" -gt 0 ]; then
 	SUBJECT_LIST="${InputSubjArr[*]}"
-else
-	if [ "$RESTART_JOB" == "yes" ]; then
-		echo "*** ERROR: specifing --restart option requires "
-	fi
+elif [ "$RUN_ALL_MODE" == "yes" ]; then
 	PartFile="$BIDS_DIR/participants.tsv"
 	if [ ! -r "$PartFile" ]; then
 		echo " * ERROR: could not read participant list = $PartFile"
 		exit 2
 	fi
 	SUBJECT_LIST=$(tail -n +2 ${PartFile} | awk '{print $1}')
+else
+	if [ "$RESTART_JOB" == "yes" ]; then
+		echo "*** ERROR: specifing --restart option requires "
+		Usage
+	else
+		echo " * WARNING: must specify one or more subject-IDs or --all option"
+		Usage
+	fi
 fi
 echo " ++ SUBJECT_LIST=${SUBJECT_LIST}"
 
