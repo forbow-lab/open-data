@@ -26,6 +26,8 @@ SCRIPT=$(python3 -c "from os.path import abspath; print(abspath('$0'))")
 SCRIPTDIR=$(dirname $SCRIPT)
 echo " + `date`: starting script = $SCRIPT"
 
+DEFAULT_HRS=12
+HRS_OPTIONS=(12 24)
 DEFAULT_NCPUS=8
 NCPUS_OPTIONS=(8 12 16)
 EMAIL_ARR=("chelmick@dal.ca" "vlad.drobinin@dal.ca")
@@ -55,6 +57,11 @@ while [[ $# -gt 0 ]]; do
       shift # past arg-name
       shift # past value
       ;;
+    -h|--hrs)
+      HRS_INPUT="$2"
+      shift # past arg-name
+      shift # past value
+      ;;
     -r|--restart)
       RESTART_JOB="yes"
       echo " + RESTART_JOB mode enabled."
@@ -65,7 +72,7 @@ while [[ $# -gt 0 ]]; do
       echo " + DEBUG_MODE enabled."
       shift
       ;;
-    -h|--help|--usage)
+    --help|--usage)
       Usage
       shift
       ;;
@@ -113,16 +120,32 @@ if [[ ! -z "$NCPUS_INPUT" ]]; then
 		fi
 	done
 	if [ "$foundUsableOption" == "no" ]; then
-		echo " * specified option ncpus=$NCPUS_INPUT does not match one of the allowed NCPUS..."
+		echo " * specified option --ncpus=$NCPUS_INPUT does not match one of the allowed NCPUS=${NCPUS_OPTIONS[@]}..."
 		Usage
 	fi
+fi
+SLURM_HRS=$DEFAULT_HRS
+if [[ ! -z "$HRS_INPUT" ]]; then
+        foundUsableOption="no"
+        for n in ${HRS_OPTIONS[@]} ; do
+                if [[ "$n" == "$HRS_INPUT" ]]; then
+                        SLURM_HRS=$HRS_INPUT
+                        echo " + now using SLURM_HRS=${SLURM_HRS}"
+                        foundUsableOption="yes"
+                        break
+                fi
+        done
+        if [ "$foundUsableOption" == "no" ]; then
+                echo " * specified option --hrs=$HRS_INPUT does not match one of the allowed HRS=${HRS_OPTIONS[@]}..."
+                Usage
+        fi
 fi
 
 ## fmriprep-specific resource variables
 RESOURCE_MEM_MB_PER_CPU=1024
 RESOURCE_OMP_THREADS=$SLURM_NCPUS
 RESOURCE_MEM_TOTAL=$((SLURM_NCPUS*RESOURCE_MEM_MB_PER_CPU))
-RESOURCE_TIMEOUT="12:00:00"
+RESOURCE_TIMEOUT="${SLURM_HRS}:00:00"
 
 ## declare project paths and folders on tape-drive
 PROJECT_DIR_TAPE=/project/6009072/fmri
