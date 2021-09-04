@@ -81,8 +81,8 @@ done
 
 ## calculate md5 for fmriprep and freesurfer .tar.gz files
 cd $fp_tar_dir/
-for f in `ls sub-*.tar.gz`; do echo " + calculating `pwd`/${f}.md5"; md5sum $f >${f}.md5 ; done
+for f in `ls sub-*.tar.gz`; do if [ ! -r "${f}.md5" ]; then echo " + calculating `pwd`/${f}.md5"; md5sum $f >${f}.md5 ; fi; done
 cd $fs_tar_dir/
-for f in `ls sub-*.tar.gz`; do echo " + calculating `pwd`/${f}.md5"; md5sum $f >${f}.md5 ; done
+for f in `ls sub-*.tar.gz`; do if [ ! -r "${f}.md5" ]; then echo " + calculating `pwd`/${f}.md5"; md5sum $f >${f}.md5 ; fi; done
 
 exit 0
