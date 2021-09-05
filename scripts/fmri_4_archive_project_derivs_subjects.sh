@@ -85,4 +85,27 @@ for f in `ls sub-*.tar.gz`; do if [ ! -r "${f}.md5" ]; then echo " + calculating
 cd $fs_tar_dir/
 for f in `ls sub-*.tar.gz`; do if [ ! -r "${f}.md5" ]; then echo " + calculating `pwd`/${f}.md5"; md5sum $f >${f}.md5 ; fi; done
 
+
+cd $PDIR/
+## --- get slurm_logs
+if [ ! -r "${PROJECT}_${SITE}_slurm_logs.tar.gz" ]; then
+	tar -vvc --use-compress-program="pigz -p 8" -f ${PROJECT}_${SITE}_slurm_logs.tar.gz ./${SITE}/derivatives/slurm_logs/ >${PROJECT}_${SITE}_slurm_logs.index
+	md5sum ${PROJECT}_${SITE}_slurm_logs.tar.gz >${PROJECT}_${SITE}_slurm_logs.tar.gz.md5
+fi
+
+## --- get resource_monitor_files
+if [ ! -r "${PROJECT}_${SITE}_resource_monitor_files.tar.gz" ]; then
+	tar -vvc --use-compress-program="pigz -p 8" -f ${PROJECT}_${SITE}_resource_monitor_files.tar.gz ./${SITE}/derivatives/resource_monitor_files/ >${PROJECT}_${SITE}_resource_monitor_files.index
+	md5sum ${PROJECT}_${SITE}_resource_monitor_files.tar.gz >${PROJECT}_${SITE}_resource_monitor_files.tar.gz.md5
+fi
+
+## -- collate all archives into one folder for easier tranfers
+mkdir -p $PDIR/deriv_archives/
+mv ${PROJECT}_${SITE}_* $PDIR/deriv_archives/
+
+
+rsync -auxH --no-p --no-g $PDIR/deriv_archives/ /project/6009072/fmri/${PROJECT}/Tar_DERIVS/deriv_archives/
+## nohup rsync -axuH --no-p --no-g $PDIR/deriv_archives/ /project/6009072/fmri/${PROJECT}/Tar_DERIVS/deriv_archives/ >>logs/nohup_rsync_deriv_archives_to_project_20210905.txt 2>&1 &
+
+
 exit 0
