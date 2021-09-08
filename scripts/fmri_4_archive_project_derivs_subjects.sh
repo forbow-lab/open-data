@@ -51,17 +51,20 @@ if [[ -z "$SITE" ]]; then
 	Usage
 fi
 
+echo " +++ `date`, starting: $(basename $0) -p ${PROJECT} -s ${SITE}"
 
-PDIR=$SCRATCH/fmri/$PROJECT/
+GRP_PROJECT=/project/6009072/fmri
+PDIR=$SCRATCH/fmri/$PROJECT
+
 if [ ! -d "$PDIR/$SITE/derivatives/fmriprep" ]; then
 	echo " *** ERROR: could not find derivatives for $PDIR/$SITE/derivatives/fmriprep/"
 	Usage
 fi
 cd $PDIR/
-fp_tar_dir=$PDIR/${PROJECT}_${SITE}_derivatives_fmriprep
-fs_tar_dir=$PDIR/${PROJECT}_${SITE}_derivatives_freesurfer
+fp_tar_dir=$PDIR/deriv_archives/${PROJECT}_${SITE}_derivatives_fmriprep
+fs_tar_dir=$PDIR/deriv_archives/${PROJECT}_${SITE}_derivatives_freesurfer
 mkdir -pv $fp_tar_dir/ $fs_tar_dir/
-for f in `ls $SITE/derivatives/fmriprep/sub-60*.html`; do 
+for f in `ls $SITE/derivatives/fmriprep/sub-*.html`; do 
 	S=$(basename $f .html)
 	## compress fmriprep
 	fp=$SITE/derivatives/fmriprep/$S
@@ -86,26 +89,28 @@ cd $fs_tar_dir/
 for f in `ls sub-*.tar.gz`; do if [ ! -r "${f}.md5" ]; then echo " + calculating `pwd`/${f}.md5"; md5sum $f >${f}.md5 ; fi; done
 
 
-cd $PDIR/
+
 ## --- get slurm_logs
+cd $PDIR/deriv_archives/
 if [ ! -r "${PROJECT}_${SITE}_slurm_logs.tar.gz" ]; then
-	tar -vvc --use-compress-program="pigz -p 8" -f ${PROJECT}_${SITE}_slurm_logs.tar.gz ./${SITE}/derivatives/slurm_logs/ >${PROJECT}_${SITE}_slurm_logs.index
-	md5sum ${PROJECT}_${SITE}_slurm_logs.tar.gz >${PROJECT}_${SITE}_slurm_logs.tar.gz.md5
+	echo " + compressing $GRP_PROJECT/slurm_logs/${PROJECT}_${SITE} -> `pwd`/${PROJECT}_${SITE}_slurm_logs.tar.gz"
+	tar -vvc --use-compress-program="pigz -p 8" -f ./${PROJECT}_${SITE}_slurm_logs.tar.gz $GRP_PROJECT/slurm_logs/${PROJECT}_${SITE}/ >./${PROJECT}_${SITE}_slurm_logs.index
+	md5sum ${PROJECT}_${SITE}_slurm_logs.tar.gz > ./${PROJECT}_${SITE}_slurm_logs.tar.gz.md5
 fi
 
 ## --- get resource_monitor_files
+cd $PDIR/deriv_archives/
 if [ ! -r "${PROJECT}_${SITE}_resource_monitor_files.tar.gz" ]; then
-	tar -vvc --use-compress-program="pigz -p 8" -f ${PROJECT}_${SITE}_resource_monitor_files.tar.gz ./${SITE}/derivatives/resource_monitor_files/ >${PROJECT}_${SITE}_resource_monitor_files.index
+	echo " + compressing $GRP_PROJECT/slurm_logs/${PROJECT}_${SITE} -> `pwd`/${PROJECT}_${SITE}_slurm_logs.tar.gz"
+	tar -vvc --use-compress-program="pigz -p 8" -f ./${PROJECT}_${SITE}_resource_monitor_files.tar.gz $PDIR/${SITE}/resource_monitor_files/ >./${PROJECT}_${SITE}_resource_monitor_files.index
 	md5sum ${PROJECT}_${SITE}_resource_monitor_files.tar.gz >${PROJECT}_${SITE}_resource_monitor_files.tar.gz.md5
 fi
 
-## -- collate all archives into one folder for easier tranfers
-mkdir -p $PDIR/deriv_archives/
-mv ${PROJECT}_${SITE}_* $PDIR/deriv_archives/
-
-
-rsync -auxH --no-p --no-g $PDIR/deriv_archives/ /project/6009072/fmri/${PROJECT}/Tar_DERIVS/deriv_archives/
+## rsync archives from ~/scratch/ to /project/
+cd $PDIR/
+rsync -auxvH --no-p --no-g ./deriv_archives/ $GRP_PROJECT/$PROJECT/Tar_DERIVS/deriv_archives/
 ## nohup rsync -axuH --no-p --no-g $PDIR/deriv_archives/ /project/6009072/fmri/${PROJECT}/Tar_DERIVS/deriv_archives/ >>logs/nohup_rsync_deriv_archives_to_project_20210905.txt 2>&1 &
 
+echo " +++ `date`, completed: $(basename $0) -p ${PROJECT} -s ${SITE}"
 
 exit 0
