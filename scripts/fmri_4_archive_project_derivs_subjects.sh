@@ -108,6 +108,7 @@ fi
 
 ## rsync archives from ~/scratch/ to /project/
 cd $PDIR/
+mkdir -p $GRP_PROJECT/$PROJECT/Tar_DERIVS/
 rsync -auxvH --no-p --no-g ./deriv_archives/ $GRP_PROJECT/$PROJECT/Tar_DERIVS/deriv_archives/
 ## nohup rsync -axuH --no-p --no-g $PDIR/deriv_archives/ /project/6009072/fmri/${PROJECT}/Tar_DERIVS/deriv_archives/ >>logs/nohup_rsync_deriv_archives_to_project_20210905.txt 2>&1 &
 
