@@ -18,7 +18,7 @@ Usage() {
 	echo "  -a|--all    Run all participants at once"
 	echo "  -d|--debug    Enable debug mode, will generate a job script but not submit"
 	echo "  -n|--ncpus    Switch from default=${DEFAULT_NCPUS} to use [8,12,16]"
-	echo "  -h|--hrss     Switch from default=${DEFAULT_HRS} to use [12,16]"
+	echo "  -h|--hrs     Switch from default=${DEFAULT_HRS} to use [12,16]"
 	echo "  -r|--restart  Restart mode, requires specifing individual subject-IDs"
 	echo "  --help        Prints this help/usage message"
 	exit 1
@@ -193,6 +193,9 @@ echo " ++ SUBJECT_LIST=${SUBJECT_LIST}"
 
 ## run each subject as one job...
 for S in ${SUBJECT_LIST} ; do
+	if [ "${S:0:4}" == "sub-" ]; then 
+		S="${S:4:${#S}-4}"
+	fi
 	SDIR=$BIDS_DIR/sub-${S}
 	if [ ! -d "$SDIR" ]; then
 		echo " *** ERROR: could not locate subject-bidsdir = $SDIR/"
