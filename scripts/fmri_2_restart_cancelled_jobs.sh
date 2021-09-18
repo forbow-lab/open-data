@@ -166,9 +166,9 @@ fi
 
 ## build a job-resubmission command, including adding extra SLURM_NCPUS to finish faster! (default_ncpus=8, takes ~8-11 hrs)
 if [ "$SUBMIT_MODE" == "yes" -a "${#SUBJECT_ARR[@]}" -gt 0 ]; then
-	cmd="$SCRIPTDIR/PNC_1_slurm_fmriprep_batch.sh -e ${EMAIL} -p $PROJECT -s $SITE -n ${SLURM_NCPUS} -h ${SLURM_HRS} ${SUBJECT_ARR[@]}"
+	cmd="$SCRIPTDIR/fmri_1_slurm_fmriprep_batch.sh -e ${EMAIL} -p $PROJECT -s $SITE -n ${SLURM_NCPUS} -h ${SLURM_HRS} ${SUBJECT_ARR[@]}"
 	if [ "$DEBUG_MODE" == "yes" ]; then
-		cmd="$SCRIPTDIR/PNC_1_slurm_fmriprep_batch.sh -d -e ${EMAIL} -p $PROJECT -s $SITE -n ${SLURM_NCPUS} -h ${SLURM_HRS} ${SUBJECT_ARR[@]}"
+		cmd="$SCRIPTDIR/fmri_1_slurm_fmriprep_batch.sh -d -e ${EMAIL} -p $PROJECT -s $SITE -n ${SLURM_NCPUS} -h ${SLURM_HRS} ${SUBJECT_ARR[@]}"
 	fi
 	echo " ++ restarting site=$SITE, subjects_arr=[${SUBJECT_ARR[@]}]"
 	eval ${cmd}
