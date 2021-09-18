@@ -17,7 +17,10 @@ SCRIPTDIR=$(dirname $SCRIPT)
 echo " + `date`: starting script = $SCRIPT"
 
 EMAIL_ARR=("chelmick@dal.ca" "vlad.drobinin@dal.ca")
-NCPUS=16
+DEFAULT_HRS=24
+HRS_OPTIONS=(12 24)
+DEFAULT_NCPUS=16
+NCPUS_OPTIONS=(8 12 16)
 RESTART_JOB="no"
 DEBUG_MODE="no"
 SUBMIT_MODE="no"
@@ -40,12 +43,22 @@ while [[ $# -gt 0 ]]; do
       shift # past arg-name
       shift # past value
       ;;
+    -n|--ncpus)
+      NCPUS_INPUT="$2"
+      shift # past arg-name
+      shift # past value
+      ;;
+    -h|--hrs)
+      HRS_INPUT="$2"
+      shift # past arg-name
+      shift # past value
+      ;;
     -d|--debug)
       DEBUG_MODE="yes"
       echo " + DEBUG_MODE enabled."
       shift
       ;;
-    -h|--help|--usage)
+    --help|--usage)
       Usage
       shift
       ;;
@@ -86,7 +99,38 @@ else
 		Usage
 	fi
 fi
-
+SLURM_NCPUS=$DEFAULT_NCPUS
+if [[ ! -z "$NCPUS_INPUT" ]]; then
+	foundUsableOption="no"
+	for n in ${NCPUS_OPTIONS[@]} ; do
+		if [[ "$n" == "$NCPUS_INPUT" ]]; then
+			SLURM_NCPUS=$NCPUS_INPUT
+			echo " + now using SLURM_NCPUS=${SLURM_NCPUS}"
+			foundUsableOption="yes"
+			break
+		fi
+	done
+	if [ "$foundUsableOption" == "no" ]; then
+		echo " * specified option --ncpus=$NCPUS_INPUT does not match one of the allowed SLURM_NCPUS=${NCPUS_OPTIONS[@]}..."
+		Usage
+	fi
+fi
+SLURM_HRS=$DEFAULT_HRS
+if [[ ! -z "$HRS_INPUT" ]]; then
+	foundUsableOption="no"
+	for n in ${HRS_OPTIONS[@]} ; do
+		if [[ "$n" == "$HRS_INPUT" ]]; then
+			SLURM_HRS=$HRS_INPUT
+			echo " + now using SLURM_HRS=${SLURM_HRS}"
+			foundUsableOption="yes"
+			break
+		fi
+	done
+	if [ "$foundUsableOption" == "no" ]; then
+		echo " * specified option --hrs=$HRS_INPUT does not match one of the allowed HRS=${HRS_OPTIONS[@]}..."
+		Usage
+	fi
+fi
 
 PROJECT_DIR_TAPE=/project/6009072/fmri
 SLURM_LOG_DIR=$PROJECT_DIR_TAPE/slurm_logs/${PROJECT}_${SITE}
@@ -120,11 +164,11 @@ if [ "$DEBUG_MODE" == "yes" -a "${#SUBJECT_ARR[@]}" -gt 0 ]; then
 	echo " ++DEBUG_MODE: need to restart site=$SITE, subjects_arr=[${SUBJECT_ARR[@]}]"
 fi
 
-## build a job-resubmission command, including adding extra NCPUS to finish faster! (default_ncpus=8, takes ~8-11 hrs)
+## build a job-resubmission command, including adding extra SLURM_NCPUS to finish faster! (default_ncpus=8, takes ~8-11 hrs)
 if [ "$SUBMIT_MODE" == "yes" -a "${#SUBJECT_ARR[@]}" -gt 0 ]; then
-	cmd="$SCRIPTDIR/PNC_1_slurm_fmriprep_batch.sh -e ${EMAIL} -p $PROJECT -s $SITE -n ${NCPUS} ${SUBJECT_ARR[@]}"
+	cmd="$SCRIPTDIR/PNC_1_slurm_fmriprep_batch.sh -e ${EMAIL} -p $PROJECT -s $SITE -n ${SLURM_NCPUS} -h ${SLURM_HRS} ${SUBJECT_ARR[@]}"
 	if [ "$DEBUG_MODE" == "yes" ]; then
-		cmd="$SCRIPTDIR/PNC_1_slurm_fmriprep_batch.sh -d -e ${EMAIL} -p $PROJECT -s $SITE -n ${NCPUS} ${SUBJECT_ARR[@]}"
+		cmd="$SCRIPTDIR/PNC_1_slurm_fmriprep_batch.sh -d -e ${EMAIL} -p $PROJECT -s $SITE -n ${SLURM_NCPUS} -h ${SLURM_HRS} ${SUBJECT_ARR[@]}"
 	fi
 	echo " ++ restarting site=$SITE, subjects_arr=[${SUBJECT_ARR[@]}]"
 	eval ${cmd}
