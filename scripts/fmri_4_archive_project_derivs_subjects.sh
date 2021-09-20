@@ -82,12 +82,20 @@ for f in `ls $SITE/derivatives/fmriprep/sub-*.html`; do
 	fi
 done
 
+## archive top-level files in fmriprep/
+cd $SITE/derivatives/fmriprep/
+ofp=$fp_tar_dir/top_level_files
+tar -vvc --use-compress-program="pigz -p 8" -f ${ofp}.tar.gz ./logs/ ./d*.json ./d*.tsv >${ofp}.index
+## archive top-level files in freesurfer/
+cd $SITE/derivatives/freesurfer/
+ofs=$fs_tar_dir/top_level_files
+tar -vvc --use-compress-program="pigz -p 8" -f ${ofs}.tar.gz ./fsaverage/ >${ofs}.index
+
 ## calculate md5 for fmriprep and freesurfer .tar.gz files
 cd $fp_tar_dir/
-for f in `ls sub-*.tar.gz`; do if [ ! -r "${f}.md5" ]; then echo " + calculating `pwd`/${f}.md5"; md5sum $f >${f}.md5 ; fi; done
+for f in `ls *.tar.gz`; do if [ ! -r "${f}.md5" ]; then echo " + calculating `pwd`/${f}.md5"; md5sum $f >${f}.md5 ; fi; done
 cd $fs_tar_dir/
-for f in `ls sub-*.tar.gz`; do if [ ! -r "${f}.md5" ]; then echo " + calculating `pwd`/${f}.md5"; md5sum $f >${f}.md5 ; fi; done
-
+for f in `ls *.tar.gz`; do if [ ! -r "${f}.md5" ]; then echo " + calculating `pwd`/${f}.md5"; md5sum $f >${f}.md5 ; fi; done
 
 
 ## --- get slurm_logs
