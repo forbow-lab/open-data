@@ -8,15 +8,15 @@ Scripts and documentation for open datasets
 | Dataset  | fMRI availability |
 | ------------- | ------------- |
 | [**ABCD** - The Adolescent Brain Cognitive Development Study](https://github.com/forbow-lab/open-data/wiki/ABCD) | Resting + Task
-| [**HBN** - Child Mind Institute: healthy brain network](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN) | 
-| [**HCP-D** - HCP-Development](https://github.com/forbow-lab/open-data/wiki/HCP-D) | 
-| [**PNC** - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC) | 
-| [**NKI** - Enhanced Nathan Kline Institute - Rockland Sample](https://github.com/forbow-lab/open-data/wiki/NKI) | 
-| [**PING** - Pediatric Imaging, Neurocognition, and Genetics](https://github.com/forbow-lab/open-data/wiki/PING) | 
-| [**ABIDE** - Autism Brain Imaging Data Exchange](https://github.com/forbow-lab/open-data/wiki/ABIDE-I-and-II) | 
-| [**CoRR** - Consortium for Reliability and Reproducibility](https://github.com/forbow-lab/open-data/wiki/CoRR) | 
-| [**ADHD-200** - International Neuroimaging Datasharing Initiative (INDI), the ADHD-200 Sample](https://github.com/forbow-lab/open-data/wiki/ADHD200) | 
-| [**NIHPD** - The NIH MRI study of normal brain development](https://github.com/forbow-lab/open-data/wiki/NIHPD) | 
+| [**HBN** - Child Mind Institute: healthy brain network](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN) | Resting + Nat Viewing
+| [**HCP-D** - HCP-Development](https://github.com/forbow-lab/open-data/wiki/HCP-D) | Resting + Task
+| [**PNC** - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC) | Resting + Task
+| [**NKI** - Enhanced Nathan Kline Institute - Rockland Sample](https://github.com/forbow-lab/open-data/wiki/NKI) | Resting
+| [**PING** - Pediatric Imaging, Neurocognition, and Genetics](https://github.com/forbow-lab/open-data/wiki/PING) | Resting
+| [**ABIDE** - Autism Brain Imaging Data Exchange](https://github.com/forbow-lab/open-data/wiki/ABIDE-I-and-II) | Resting 
+| [**CoRR** - Consortium for Reliability and Reproducibility](https://github.com/forbow-lab/open-data/wiki/CoRR) | Resting
+| [**ADHD-200** - International Neuroimaging Datasharing Initiative (INDI), the ADHD-200 Sample](https://github.com/forbow-lab/open-data/wiki/ADHD200) | Resting
+| [**NIHPD** - The NIH MRI study of normal brain development](https://github.com/forbow-lab/open-data/wiki/NIHPD) | NA
 
 
 ---
