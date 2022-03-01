@@ -7,7 +7,7 @@ Scripts and documentation for open datasets
 
 | Dataset  | fMRI availability |
 | ------------- | ------------- |
-| [**ABCD** - The Adolescent Brain Cognitive Development Study](https://github.com/forbow-lab/open-data/wiki/ABCD) | 
+| [**ABCD** - The Adolescent Brain Cognitive Development Study](https://github.com/forbow-lab/open-data/wiki/ABCD) | Resting + Task
 | [**HBN** - Child Mind Institute: healthy brain network](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN) | 
 | [**HCP-D** - HCP-Development](https://github.com/forbow-lab/open-data/wiki/HCP-D) | 
 | [**PNC** - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC) | 
