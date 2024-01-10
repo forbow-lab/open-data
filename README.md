@@ -17,6 +17,7 @@ Scripts and documentation for open datasets
 | [**CoRR** - Consortium for Reliability and Reproducibility](https://github.com/forbow-lab/open-data/wiki/CoRR) | Resting
 | [**ADHD-200** - International Neuroimaging Datasharing Initiative (INDI), the ADHD-200 Sample](https://github.com/forbow-lab/open-data/wiki/ADHD200) | Resting
 | [**NIHPD** - The NIH MRI study of normal brain development](https://github.com/forbow-lab/open-data/wiki/NIHPD) | NA
+| [**QTAB** - The NIH MRI study of normal brain development](https://github.com/forbow-lab/open-data/wiki/QTAB) | rsfMRI + sMRI
 
 
 ---
