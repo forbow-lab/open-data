@@ -10,7 +10,7 @@ Scripts and documentation for open datasets
 | [**ABCD** - The Adolescent Brain Cognitive Development Study](https://github.com/forbow-lab/open-data/wiki/ABCD) | Resting + Task
 | [**HBN** - Child Mind Institute: healthy brain network](https://github.com/forbow-lab/open-data/wiki/CMI:-HBN) | Resting + Nat Viewing
 | [**HCP-D** - HCP-Development](https://github.com/forbow-lab/open-data/wiki/HCP-D) | Resting + Task
-| [**PNC** - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC) | Resting + Task
+| [**PNC** - Philadelphia neurodevelopmental cohort](https://github.com/forbow-lab/open-data/wiki/PNC) | Resting (6.2mins) + Task
 | [**NKI** - Enhanced Nathan Kline Institute - Rockland Sample](https://github.com/forbow-lab/open-data/wiki/NKI) | Resting
 | [**PING** - Pediatric Imaging, Neurocognition, and Genetics](https://github.com/forbow-lab/open-data/wiki/PING) | Resting
 | [**ABIDE** - Autism Brain Imaging Data Exchange](https://github.com/forbow-lab/open-data/wiki/ABIDE-I-and-II) | Resting 
